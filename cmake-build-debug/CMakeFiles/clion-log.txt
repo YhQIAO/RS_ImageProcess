@@ -1,0 +1,4 @@
+/Applications/CLion.app/Contents/bin/cmake/mac/bin/cmake -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - Unix Makefiles" "/Users/qiaoyihong/Library/Mobile Documents/com~apple~CloudDocs/MyUniversity/遥感数字图像处理/RS_ImageProcess"
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /Users/qiaoyihong/Library/Mobile Documents/com~apple~CloudDocs/MyUniversity/遥感数字图像处理/RS_ImageProcess/cmake-build-debug

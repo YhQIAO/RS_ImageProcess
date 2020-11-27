@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6"/>
+	<Project>
+		<Option title="RS_image_process"/>
+		<Option makefile_is_custom="1"/>
+		<Option compiler="gcc"/>
+		<Option virtualFolders="CMake Files\;CMake Files\..\;CMake Files\..\..\;CMake Files\..\..\..\;CMake Files\..\..\..\..\;CMake Files\..\..\..\..\..\;CMake Files\..\..\..\..\..\..\;CMake Files\..\..\..\..\..\..\..\;CMake Files\..\..\..\..\..\..\..\..\;CMake Files\..\..\..\..\..\..\..\..\usr\;CMake Files\..\..\..\..\..\..\..\..\usr\local\;CMake Files\..\..\..\..\..\..\..\..\usr\local\lib\;CMake Files\..\..\..\..\..\..\..\..\usr\local\lib\cmake\;CMake Files\..\..\..\..\..\..\..\..\usr\local\lib\cmake\opencv4\;"/>
+		<Build>
+			<Target title="all">
+				<Option working_dir="/Users/qiaoyihong/Library/Mobile Documents/com~apple~CloudDocs/MyUniversity/遥感数字图像处理/RS_ImageProcess/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/Users/qiaoyihong/Library/Mobile\ Documents/com~apple~CloudDocs/MyUniversity/遥感数字图像处理/RS_ImageProcess/cmake-build-debug/Makefile&quot;  VERBOSE=1 all"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/Users/qiaoyihong/Library/Mobile\ Documents/com~apple~CloudDocs/MyUniversity/遥感数字图像处理/RS_ImageProcess/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/Users/qiaoyihong/Library/Mobile\ Documents/com~apple~CloudDocs/MyUniversity/遥感数字图像处理/RS_ImageProcess/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/Users/qiaoyihong/Library/Mobile\ Documents/com~apple~CloudDocs/MyUniversity/遥感数字图像处理/RS_ImageProcess/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="rebuild_cache">
+				<Option working_dir="/Users/qiaoyihong/Library/Mobile Documents/com~apple~CloudDocs/MyUniversity/遥感数字图像处理/RS_ImageProcess/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/Users/qiaoyihong/Library/Mobile\ Documents/com~apple~CloudDocs/MyUniversity/遥感数字图像处理/RS_ImageProcess/cmake-build-debug/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/Users/qiaoyihong/Library/Mobile\ Documents/com~apple~CloudDocs/MyUniversity/遥感数字图像处理/RS_ImageProcess/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/Users/qiaoyihong/Library/Mobile\ Documents/com~apple~CloudDocs/MyUniversity/遥感数字图像处理/RS_ImageProcess/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/Users/qiaoyihong/Library/Mobile\ Documents/com~apple~CloudDocs/MyUniversity/遥感数字图像处理/RS_ImageProcess/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="edit_cache">
+				<Option working_dir="/Users/qiaoyihong/Library/Mobile Documents/com~apple~CloudDocs/MyUniversity/遥感数字图像处理/RS_ImageProcess/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/Users/qiaoyihong/Library/Mobile\ Documents/com~apple~CloudDocs/MyUniversity/遥感数字图像处理/RS_ImageProcess/cmake-build-debug/Makefile&quot;  VERBOSE=1 edit_cache"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/Users/qiaoyihong/Library/Mobile\ Documents/com~apple~CloudDocs/MyUniversity/遥感数字图像处理/RS_ImageProcess/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/Users/qiaoyihong/Library/Mobile\ Documents/com~apple~CloudDocs/MyUniversity/遥感数字图像处理/RS_ImageProcess/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/Users/qiaoyihong/Library/Mobile\ Documents/com~apple~CloudDocs/MyUniversity/遥感数字图像处理/RS_ImageProcess/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="RS_image_process">
+				<Option output="/Users/qiaoyihong/Library/Mobile Documents/com~apple~CloudDocs/MyUniversity/遥感数字图像处理/RS_ImageProcess/cmake-build-debug/RS_image_process" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/Users/qiaoyihong/Library/Mobile Documents/com~apple~CloudDocs/MyUniversity/遥感数字图像处理/RS_ImageProcess/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/usr/local/Cellar/opencv/4.5.0_5/include/opencv4"/>
+					<Add directory="/Library/Developer/CommandLineTools/usr/bin/../include/c++/v1"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/Library/Developer/CommandLineTools/usr/lib/clang/12.0.0/include"/>
+					<Add directory="/Library/Developer/CommandLineTools/usr/include"/>
+					<Add directory="/System/Library/Frameworks"/>
+					<Add directory="/Library/Frameworks"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/Users/qiaoyihong/Library/Mobile\ Documents/com~apple~CloudDocs/MyUniversity/遥感数字图像处理/RS_ImageProcess/cmake-build-debug/Makefile&quot;  VERBOSE=1 RS_image_process"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/Users/qiaoyihong/Library/Mobile\ Documents/com~apple~CloudDocs/MyUniversity/遥感数字图像处理/RS_ImageProcess/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/Users/qiaoyihong/Library/Mobile\ Documents/com~apple~CloudDocs/MyUniversity/遥感数字图像处理/RS_ImageProcess/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/Users/qiaoyihong/Library/Mobile\ Documents/com~apple~CloudDocs/MyUniversity/遥感数字图像处理/RS_ImageProcess/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="RS_image_process/fast">
+				<Option output="/Users/qiaoyihong/Library/Mobile Documents/com~apple~CloudDocs/MyUniversity/遥感数字图像处理/RS_ImageProcess/cmake-build-debug/RS_image_process" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/Users/qiaoyihong/Library/Mobile Documents/com~apple~CloudDocs/MyUniversity/遥感数字图像处理/RS_ImageProcess/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/usr/local/Cellar/opencv/4.5.0_5/include/opencv4"/>
+					<Add directory="/Library/Developer/CommandLineTools/usr/bin/../include/c++/v1"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/Library/Developer/CommandLineTools/usr/lib/clang/12.0.0/include"/>
+					<Add directory="/Library/Developer/CommandLineTools/usr/include"/>
+					<Add directory="/System/Library/Frameworks"/>
+					<Add directory="/Library/Frameworks"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/Users/qiaoyihong/Library/Mobile\ Documents/com~apple~CloudDocs/MyUniversity/遥感数字图像处理/RS_ImageProcess/cmake-build-debug/Makefile&quot;  VERBOSE=1 RS_image_process/fast"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/Users/qiaoyihong/Library/Mobile\ Documents/com~apple~CloudDocs/MyUniversity/遥感数字图像处理/RS_ImageProcess/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/Users/qiaoyihong/Library/Mobile\ Documents/com~apple~CloudDocs/MyUniversity/遥感数字图像处理/RS_ImageProcess/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/Users/qiaoyihong/Library/Mobile\ Documents/com~apple~CloudDocs/MyUniversity/遥感数字图像处理/RS_ImageProcess/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+		</Build>
+		<Unit filename="/Users/qiaoyihong/Library/Mobile Documents/com~apple~CloudDocs/MyUniversity/遥感数字图像处理/RS_ImageProcess/Problem6-2/Problem6-2.cpp">
+			<Option target="RS_image_process"/>
+		</Unit>
+		<Unit filename="/Users/qiaoyihong/Library/Mobile Documents/com~apple~CloudDocs/MyUniversity/遥感数字图像处理/RS_ImageProcess/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\"/>
+		</Unit>
+		<Unit filename="/Users/qiaoyihong/Library/Mobile Documents/com~apple~CloudDocs/MyUniversity/遥感数字图像处理/RS_ImageProcess/../../../../../../../../usr/local/lib/cmake/opencv4/OpenCVConfig-version.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\..\..\..\..\usr\local\lib\cmake\opencv4\"/>
+		</Unit>
+		<Unit filename="/Users/qiaoyihong/Library/Mobile Documents/com~apple~CloudDocs/MyUniversity/遥感数字图像处理/RS_ImageProcess/../../../../../../../../usr/local/lib/cmake/opencv4/OpenCVConfig.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\..\..\..\..\usr\local\lib\cmake\opencv4\"/>
+		</Unit>
+		<Unit filename="/Users/qiaoyihong/Library/Mobile Documents/com~apple~CloudDocs/MyUniversity/遥感数字图像处理/RS_ImageProcess/../../../../../../../../usr/local/lib/cmake/opencv4/OpenCVModules-release.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\..\..\..\..\usr\local\lib\cmake\opencv4\"/>
+		</Unit>
+		<Unit filename="/Users/qiaoyihong/Library/Mobile Documents/com~apple~CloudDocs/MyUniversity/遥感数字图像处理/RS_ImageProcess/../../../../../../../../usr/local/lib/cmake/opencv4/OpenCVModules.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\..\..\..\..\usr\local\lib\cmake\opencv4\"/>
+		</Unit>
+	</Project>
+</CodeBlocks_project_file>
