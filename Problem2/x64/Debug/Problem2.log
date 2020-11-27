@@ -1,4 +1,0 @@
-﻿C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\MSBuild\Microsoft\VC\v160\Microsoft.CppBuild.targets(491,5): warning MSB8028: 中间目录(x64\Debug\)包含从另一个项目(Problem2.vcxproj)共享的文件。   这会导致错误的清除和重新生成行为。
-  demo.cpp
-C:\Users\julyfire\Desktop\遥感数字图像处理\ImageProcess\Problem2\demo.cpp(28,6): warning C4101: “originalData”: 未引用的局部变量
-  Problem2.vcxproj -> C:\Users\julyfire\Desktop\遥感数字图像处理\ImageProcess\x64\Debug\Problem2-2.exe

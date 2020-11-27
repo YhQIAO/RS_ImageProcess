@@ -1,2 +1,0 @@
-C:\Users\julyfire\Desktop\University\遥感数字图像处理\第2章_数字图像存储\Code\ImageProcess\x64\Debug\Problem2.exe.lastcodeanalysissucceeded
-C:\Users\julyfire\Desktop\University\遥感数字图像处理\第2章_数字图像存储\Code\ImageProcess\Problem2\x64\Debug\NativeCodeAnalysis.read.1.tlog
