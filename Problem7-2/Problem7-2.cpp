@@ -1,7 +1,3 @@
-//
-// Created by 乔亦弘 on 2020/11/27.
-//
-
 #include <iostream>
 #include <opencv2/opencv.hpp>
 #include <fstream>
