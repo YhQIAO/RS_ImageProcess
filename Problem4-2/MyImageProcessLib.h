@@ -1,4 +1,3 @@
-#pragma once
 #include <iostream>
 #include <opencv2/opencv.hpp>
 #include <fstream>
@@ -10,8 +9,8 @@ using namespace std;
 using namespace Eigen;
 
 cv::Mat readBinaryImageOfBandX(
-    string filepath, int rowNum, int colNum,
-    int bandNum, int AllBandNum, int dataType) {
+        string filepath, int rowNum, int colNum,
+        int bandNum, int AllBandNum, int dataType) {
 
     if (dataType == 2) {
         cv::Mat image(rowNum, colNum, CV_16SC1);
@@ -20,12 +19,12 @@ cv::Mat readBinaryImageOfBandX(
         int value;
         ifstream readDatFstream(filepath, ios::binary | ios::in);
         while (readDatFstream.read(
-            (char*)&value, dataType // =2
+                (char*)&value, dataType // =2
         )) {
-            // BSQµÄ´æ´¢·½·¨
+            // BSQçš„å­˜å‚¨æ–¹æ³•
             if (num / colNum / rowNum + 1 == bandNum) {
-                int row = (num / colNum) - (bandNum - 1) * rowNum; // È¡µÃÖ¸¶¨²¨¶ÎĞĞÊı
-                int col = num % colNum; // »ñµÃÁĞÊı
+                int row = (num / colNum) - (bandNum - 1) * rowNum; // å–å¾—æŒ‡å®šæ³¢æ®µè¡Œæ•°
+                int col = num % colNum; // è·å¾—åˆ—æ•°
                 image.at<int16_t>(row, col) = value;
             }
             num++;
@@ -35,6 +34,6 @@ cv::Mat readBinaryImageOfBandX(
     else {
         cout << "falied to load an image!" << endl;
         return cv::Mat(0, 0, CV_8UC3);
-        // ·µ»ØÃ»ÓĞÈÎºÎÒâÒåµÄ¿ÕÍ¼Ïñ
+        // è¿”å›æ²¡æœ‰ä»»ä½•æ„ä¹‰çš„ç©ºå›¾åƒ
     }
 }

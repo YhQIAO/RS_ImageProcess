@@ -1,8 +1,7 @@
-#pragma once
 //
-// Created by ÇÇÒàºë on 2020/10/9.
+// Created by ä¹”äº¦å¼˜ on 2020/10/9.
 //
-#define _USE_MATH_DEFINES 
+#define _USE_MATH_DEFINES
 #include <math.h>
 
 #include <iostream>
@@ -19,88 +18,88 @@ using namespace std;
 using namespace Eigen;
 
 
-// ÊµÏÖ¸µÀïÒ¶±ä»»
-// ÏÈ°´ĞĞ×öÒ»±éÒ»Î¬¸µÀïÒ¶±ä»»£¬ÔÙ°´ÁĞ×öÒ»±é
+// å®ç°å‚…é‡Œå¶å˜æ¢
+// å…ˆæŒ‰è¡Œåšä¸€éä¸€ç»´å‚…é‡Œå¶å˜æ¢ï¼Œå†æŒ‰åˆ—åšä¸€é
 
 cv::Mat DFT(cv::Mat oriImage) {
-	int rowNum = oriImage.rows;
-	int colNum = oriImage.cols;
+    int rowNum = oriImage.rows;
+    int colNum = oriImage.cols;
 
-	Matrix<double, Dynamic, Dynamic> imageData;
-	cv::cv2eigen(oriImage, imageData);
+    Matrix<double, Dynamic, Dynamic> imageData;
+    cv::cv2eigen(oriImage, imageData);
 
-	for (int i = 0; i < rowNum; i++) {
-		for (int j = 0; j < colNum; j++) {
-			imageData(i, j) = imageData(i, j) * pow(-1, (i + j));
-		}
-	}
+    for (int i = 0; i < rowNum; i++) {
+        for (int j = 0; j < colNum; j++) {
+            imageData(i, j) = imageData(i, j) * pow(-1, (i + j));
+        }
+    }
 
-	Matrix<complex<double>, Dynamic, Dynamic> complexImage(rowNum, colNum);
-	// °´ĞĞ×ö¸µÀïÒ¶±ä»»
-	
-	for (int i = 0; i < rowNum; i++) {
-		cout << i << endl;
-		for (int j = 0; j < colNum; j++) {
-			
-			complex<double> temp{ 0,0 };
-			for (int x = 0; x < colNum; x++) {
-				complex<double> temp1 = {
-					cos(2 * PI * j * x / colNum),
-					-sin(2*PI*j*x/ colNum)
-				};
-				temp += imageData(i, x) * temp1;
-			}
-			complexImage(i, j) = temp * (1.0/colNum);
-		}
-	}
+    Matrix<complex<double>, Dynamic, Dynamic> complexImage(rowNum, colNum);
+    // æŒ‰è¡Œåšå‚…é‡Œå¶å˜æ¢
 
-	Matrix<complex<double>, Dynamic, Dynamic> recomplexImage = complexImage;
+    for (int i = 0; i < rowNum; i++) {
+        cout << i << endl;
+        for (int j = 0; j < colNum; j++) {
 
-	for (int i = 0; i < colNum; i++) {
-		cout << i << endl;
-		for (int j = 0; j < rowNum; j++) {
+            complex<double> temp{ 0,0 };
+            for (int x = 0; x < colNum; x++) {
+                complex<double> temp1 = {
+                        cos(2 * PI * j * x / colNum),
+                        -sin(2*PI*j*x/ colNum)
+                };
+                temp += imageData(i, x) * temp1;
+            }
+            complexImage(i, j) = temp * (1.0/colNum);
+        }
+    }
 
-			complex<double> temp{ 0,0 };
-			for (int x = 0; x < rowNum; x++) {
-				complex<double> temp1 = {
-					cos(2 * PI * j * x / rowNum),
-					-sin(2 * PI * j * x / rowNum)
-				};
-				temp += recomplexImage(x, i) * temp1;
-			}
-			complexImage(j,i) = temp * (1.0 / rowNum);
-		}
-	}
+    Matrix<complex<double>, Dynamic, Dynamic> recomplexImage = complexImage;
 
-	Matrix<double, Dynamic, Dynamic> pImage(394, 390);
-	cv::Mat result(rowNum, colNum, CV_8UC1);
+    for (int i = 0; i < colNum; i++) {
+        cout << i << endl;
+        for (int j = 0; j < rowNum; j++) {
 
-	for (int i = 0; i < rowNum; i++) {
-		for (int j = 0; j < colNum; j++) {
-			pImage(i,j) = log(abs(complexImage(i, j)));
-			// cout << pImage(i, j) << endl;
-		}
-	}
+            complex<double> temp{ 0,0 };
+            for (int x = 0; x < rowNum; x++) {
+                complex<double> temp1 = {
+                        cos(2 * PI * j * x / rowNum),
+                        -sin(2 * PI * j * x / rowNum)
+                };
+                temp += recomplexImage(x, i) * temp1;
+            }
+            complexImage(j,i) = temp * (1.0 / rowNum);
+        }
+    }
 
-	
-	double min = pImage.minCoeff();
-	double max = pImage.maxCoeff();
+    Matrix<double, Dynamic, Dynamic> pImage(394, 390);
+    cv::Mat result(rowNum, colNum, CV_8UC1);
 
-	for (int i = 0; i < rowNum; i++) {
-		for (int j = 0; j < colNum; j++) {
-			result.at<uchar>(i, j) = (int)( 
-				(pImage(i, j)-min)*255 / (max-min) 
-				);
-		}
-	}
-	
-	return result;
+    for (int i = 0; i < rowNum; i++) {
+        for (int j = 0; j < colNum; j++) {
+            pImage(i,j) = log(abs(complexImage(i, j)));
+            // cout << pImage(i, j) << endl;
+        }
+    }
+
+
+    double min = pImage.minCoeff();
+    double max = pImage.maxCoeff();
+
+    for (int i = 0; i < rowNum; i++) {
+        for (int j = 0; j < colNum; j++) {
+            result.at<uchar>(i, j) = (int)(
+                    (pImage(i, j)-min)*255 / (max-min)
+            );
+        }
+    }
+
+    return result;
 
 }
 //float getREAt_uv(cv::Mat& Image, int u, int v, int M, int N);
 //cv::Mat DFT(cv::Mat image) {
-//    // ¸µÁ¢Ò¶±ä»»
-//    
+//    // å‚…ç«‹å¶å˜æ¢
+//
 //    cv::Mat fouriImage(image.rows, image.cols, CV_16SC1);
 //    Matrix<int16_t, Dynamic, Dynamic> llimage(image.rows, image.cols);
 //
@@ -111,7 +110,7 @@ cv::Mat DFT(cv::Mat oriImage) {
 //    }
 //
 //    float max = -1;
-//    // ÓÃ±ä»»¹«Ê½½«¿Õ¼äÓò×ª»¯ÖÁÆµÂÊÓò
+//    // ç”¨å˜æ¢å…¬å¼å°†ç©ºé—´åŸŸè½¬åŒ–è‡³é¢‘ç‡åŸŸ
 //    // f(u,v) = sigma_0_M-1(sigma_0_N-1( f(x,y)*
 //    for (int u = 0; u < image.rows; u++) {
 //        cout << u << endl;
@@ -133,9 +132,9 @@ cv::Mat DFT(cv::Mat oriImage) {
 //        }
 //    }
 //
-//  
+//
 //    return eightBitImage;
-//    
+//
 //}
 //
 //float getREAt_uv(cv::Mat& Image, int u, int v, int M, int N) {
@@ -145,15 +144,15 @@ cv::Mat DFT(cv::Mat oriImage) {
 //    float imSum = 0;
 //    for (int x = 0; x < M; x++) {
 //        for (int y = 0; y < N; y++) {
-//            // ·ù½Ç
+//            // å¹…è§’
 //            float theta = -2 * M_PI * (
 //                (float(u * x) / M) + (float(v * y) / N)
 //                );
-//            // Ä£
+//            // æ¨¡
 //            int length = (int)Image.at<int16_t>(x, y);
-//            // Êµ²¿
+//            // å®éƒ¨
 //            float re = length * cos(theta);
-//            // Ğé²¿
+//            // è™šéƒ¨
 //            float im = length * sin(theta);
 //            reSum += re;
 //            imSum += im;
@@ -164,4 +163,3 @@ cv::Mat DFT(cv::Mat oriImage) {
 //    );
 //    return result / MN;
 //}
-
