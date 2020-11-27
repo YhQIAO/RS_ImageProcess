@@ -1,5 +1,5 @@
 //
-// Created by ÇÇÒàºë on 2020/11/6.
+// Created by ä¹”äº¦å¼˜ on 2020/11/6.
 //
 #include <iostream>
 #include <fstream>
@@ -13,83 +13,82 @@
 
 using namespace std;
 
-// ×ª»¡¶È
+// è½¬å¼§åº¦
 double convert2Rad(double du);
-// ÏÔÊ¾¶à¹âÆ×Í¼Ïñ
+// æ˜¾ç¤ºå¤šå…‰è°±å›¾åƒ
 void showColoredImage(vector<cv::Mat> MultiSpecImage, int index);
-// ¼ÆËãÆÂÏò
+// è®¡ç®—å¡å‘
 float getAngle(float fn, double fs);
-// ÊµÏÖµØĞÎ½ÃÕı
+// å®ç°åœ°å½¢çŸ«æ­£
 vector<cv::Mat> dixingjiaozheng(vector<cv::Mat> oriImage,
-    double theta,
-    cv::Mat& cosi, double c);
-
+                                double theta,
+                                cv::Mat& cosi, double c);
 
 int main() {
 
-    string DEMFilepath = "..\\..\\µÚ5ÕÂ_·øÉä´¦Àí\\data\\Landsat5_sd_dem.dat";
-    string ImageFilepath = "..\\..\\µÚ5ÕÂ_·øÉä´¦Àí\\data\\Landsat5_sd_ref2.dat";
+    string DEMFilepath = "../Chap5/data/Landsat5_sd_dem.dat";
+    string ImageFilepath = "../Chap5/data/Landsat5_sd_ref2.dat";
     cv::Mat DEMMat = readBinaryImageOfBandX(DEMFilepath, 500, 500, 1, 1, 2);
     DEMMat.convertTo(DEMMat, CV_32F);
     vector<cv::Mat> MultiSpecImage = readMultiSpectralImage(ImageFilepath, 500, 500, 6, 4, "BSQ");
 
-    // ¶¨Òå¾í»ıºË¼ÆËãÆÂ¶ÈÆÂÏò
-    // ÏÈ¼ÆËãnotrh·½ÏòÆÂ¶È
+    // å®šä¹‰å·ç§¯æ ¸è®¡ç®—å¡åº¦å¡å‘
+    // å…ˆè®¡ç®—notrhæ–¹å‘å¡åº¦
     cv::Mat nKernel(3, 3, CV_32F);
     nKernel.at<float>(0, 0) = 0.25; nKernel.at<float>(0, 1) = 0.5; nKernel.at<float>(0, 2) = 0.25;
     nKernel.at<float>(1, 0) = 0; nKernel.at<float>(1, 1) = 0; nKernel.at<float>(1, 2) = 0;
     nKernel.at<float>(2, 0) = -0.25; nKernel.at<float>(2, 1) = -0.5; nKernel.at<float>(2, 2) = -0.25;
-    // ÔÙ¼ÆËãeast·½ÏòÆÂ¶È
+    // å†è®¡ç®—eastæ–¹å‘å¡åº¦
     cv::Mat eKernel(3, 3, CV_32F);
     eKernel.at<float>(0, 0) = -0.25; eKernel.at<float>(0, 1) = 0; eKernel.at<float>(0, 2) =0.25;
     eKernel.at<float>(1, 0) = -0.5; eKernel.at<float>(1, 1) = 0; eKernel.at<float>(1, 2) = 0.5;
     eKernel.at<float>(2, 0) = -0.25; eKernel.at<float>(2, 1) = 0; eKernel.at<float>(2, 2) = 0.25;
 
     cv::Mat nSlope(500, 500, CV_32F),
-        eSlope(500, 500, CV_32F),
-        SlopeMat(500, 500, CV_32F),
-        AspectMat(500, 500, CV_32F);
+            eSlope(500, 500, CV_32F),
+            SlopeMat(500, 500, CV_32F),
+            AspectMat(500, 500, CV_32F);
     cv::filter2D(DEMMat, nSlope, DEMMat.depth(), nKernel);
     cv::filter2D(DEMMat, eSlope, DEMMat.depth(), eKernel);
 
-    // ÆÂ¶È = atan(sqrt£¨fe^2+fn^2))
-    // ÆÂÏò
+    // å¡åº¦ = atan(sqrtï¼ˆfe^2+fn^2))
+    // å¡å‘
     for (int i = 0; i < 500; i++) {
         for (int j = 0; j < 500; j++) {
             SlopeMat.at<float>(i, j) = atan(sqrt(
-                nSlope.at<float>(i, j) * nSlope.at<float>(i, j) +
-                eSlope.at<float>(i, j) * eSlope.at<float>(i, j)
+                    nSlope.at<float>(i, j) * nSlope.at<float>(i, j) +
+                    eSlope.at<float>(i, j) * eSlope.at<float>(i, j)
             ));
             AspectMat.at<float>(i, j) = getAngle(
-                nSlope.at<float>(i, j), eSlope.at<float>(i, j));
+                    nSlope.at<float>(i, j), eSlope.at<float>(i, j));
         }
     }
-    // Ì«ÑôÌì¶¥½Çtheta£¬Ì«Ñô·½Î»½Çfai£¬inÌ«ÑôÈëÉä½Ç
-    //    SUN_AZIMUTH = 156.93529928 Ì«Ñô·½Î»½Ç
-    //    SUN_ELEVATION = 38.25092925 Ì«Ñô¸ß¶È½Ç
+    // å¤ªé˜³å¤©é¡¶è§’thetaï¼Œå¤ªé˜³æ–¹ä½è§’faiï¼Œinå¤ªé˜³å…¥å°„è§’
+    //    SUN_AZIMUTH = 156.93529928 å¤ªé˜³æ–¹ä½è§’
+    //    SUN_ELEVATION = 38.25092925 å¤ªé˜³é«˜åº¦è§’
     double fai = convert2Rad(156.93529928);
     double theta = convert2Rad(38.25092925);
 
-    // Ì«ÑôÈëÉä½Ç
+    // å¤ªé˜³å…¥å°„è§’
     //cosi = cos(theta)*cos(slope)+sin(theta)*sin(slope)*cos(aspect-fai);
 
-    // ¼ÇÂ¼Ã¿¸öÏñÔªÖµµÄcosi
+    // è®°å½•æ¯ä¸ªåƒå…ƒå€¼çš„cosi
     cv::Mat cosiMat(500-2, 500-2, CV_32F);
 
     for (int i = 1; i < 500-1; i++) {
         for (int j = 1; j < 500 - 1; j++) {
             cosiMat.at<float>(i - 1, j - 1) = cos(theta) * cos(SlopeMat.at<float>(i, j))
-                + sin(theta) * sin(SlopeMat.at<float>(i, j))*cos(AspectMat.at<float>(i, j) - fai);
+                                              + sin(theta) * sin(SlopeMat.at<float>(i, j))*cos(AspectMat.at<float>(i, j) - fai);
         }
     }
-    // ¼ÆËãCÖµ
+    // è®¡ç®—Cå€¼
     int rowPixelNum = 498;
     int colPixelNum = 498;
 
     Eigen::Matrix<float, Dynamic, Dynamic> B_mat(498 * 498, 2);
     Eigen::Matrix<float, Dynamic, Dynamic> L_mat(498 * 498, 1);
 
-    // ×îĞ¡¶ş³Ë £¨B_T*B)^(-1)*B_T*L
+    // æœ€å°äºŒä¹˜ ï¼ˆB_T*B)^(-1)*B_T*L
     for (int i = 0; i < 498 * 498; i++) {
 
         B_mat(i, 0) = cosiMat.at<float>(i / 498, i % 498);
@@ -101,21 +100,21 @@ int main() {
     Eigen::Matrix<float, 2, 1> kb;
     kb = (B_mat.transpose() * B_mat).inverse()* B_mat.transpose()* L_mat;
     double C = kb(1, 0) / kb(0.0);
-    
-    // µ÷ÓÃµØĞÎ½ÃÕıº¯Êı
+
+    // è°ƒç”¨åœ°å½¢çŸ«æ­£å‡½æ•°
     vector<cv::Mat> result = dixingjiaozheng(MultiSpecImage, theta, cosiMat,C);
-   
+
 
     showColoredImage(MultiSpecImage, 2);
     showColoredImage(result, 2);
-    
+
 }
 
-// ×ª»¡¶È
+// è½¬å¼§åº¦
 double convert2Rad(double du) {
     return du / 180 * PI;
 }
-// ÏÔÊ¾¶à²¨¶ÎÍ¼Æ¬
+// æ˜¾ç¤ºå¤šæ³¢æ®µå›¾ç‰‡
 void showColoredImage(vector<cv::Mat> MultiSpecImage,int index) {
 
     int row = (MultiSpecImage.at(0)).rows;
@@ -128,8 +127,8 @@ void showColoredImage(vector<cv::Mat> MultiSpecImage,int index) {
         cv::Mat singleBand = MultiSpecImage.at(i);
         double minvalue, maxvalue;
         cv::minMaxIdx(singleBand, &minvalue, &maxvalue, 0, 0, noArray());
-        
-        singleBand /= maxvalue; // ¹éÒ»»¯
+
+        singleBand /= maxvalue; // å½’ä¸€åŒ–
 
         for (int m = 0; m < row; m ++ ) {
             for (int n = 0; n < col; n++) {
@@ -140,9 +139,9 @@ void showColoredImage(vector<cv::Mat> MultiSpecImage,int index) {
 
     cv::imshow("test", colorImage);
     cv::waitKey(0);
-   
+
 }
-// ¼ÆËãÆÂÏòµÄº¯Êı
+// è®¡ç®—å¡å‘çš„å‡½æ•°
 float getAngle(float fn, double fs) {
     if (fn < 0 && fs < 0){
         return atan(fs / fn);
@@ -177,23 +176,23 @@ float getAngle(float fn, double fs) {
     }
 }
 
-// µØĞÎ½ÃÕı
-vector<cv::Mat> dixingjiaozheng(vector<cv::Mat> oriImage, 
-                                double theta, 
-                                cv::Mat& cosi, double c) 
+// åœ°å½¢çŸ«æ­£
+vector<cv::Mat> dixingjiaozheng(vector<cv::Mat> oriImage,
+                                double theta,
+                                cv::Mat& cosi, double c)
 {
     int row = oriImage.at(0).rows;
     int col = oriImage.at(0).cols;
     vector<cv::Mat> reImage;
-    
+
     for (int i = 0; i < oriImage.size(); i++) {
-        
+
         cv::Mat tempImage(row-2, col-2, CV_32F);
-        
+
         for (int m = 0; m < row-2; m++) {
             for (int n = 0; n < col-2; n++) {
                 tempImage.at<float>(m, n) = oriImage.at(i).at<float>(m + 1, n + 1) *
-                    ((cos(theta) + c) / (cosi.at<float>(m, n) + c));
+                                            ((cos(theta) + c) / (cosi.at<float>(m, n) + c));
             }
         }
         reImage.push_back(tempImage);

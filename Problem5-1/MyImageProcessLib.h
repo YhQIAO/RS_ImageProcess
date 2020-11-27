@@ -1,6 +1,6 @@
 #pragma once
 //
-// Created by ÇÇÒàºë on 2020/9/29.
+// Created by ä¹”äº¦å¼˜ on 2020/9/29.
 //
 
 #include <iostream>
@@ -13,10 +13,10 @@ using namespace std;
 using namespace cv;
 using namespace Eigen;
 
-// ¶ÁÈ¡¶ş½øÖÆÎÄ¼şµÄÍ¼Ïñ²¨¶Î
+// è¯»å–äºŒè¿›åˆ¶æ–‡ä»¶çš„å›¾åƒæ³¢æ®µ
 Mat readBinaryImageOfBandX(
-    string filepath, int rowNum, int colNum,
-    int bandNum, int AllBandNum, int dataType) {
+        string filepath, int rowNum, int colNum,
+        int bandNum, int AllBandNum, int dataType) {
 
     if (dataType == 2) {
         Mat image(rowNum, colNum, CV_16SC1);
@@ -25,12 +25,12 @@ Mat readBinaryImageOfBandX(
         int value;
         ifstream readDatFstream(filepath, ios::binary | ios::in);
         while (readDatFstream.read(
-            (char*)&value, dataType // =2
+                (char*)&value, dataType // =2
         )) {
-            // BSQµÄ´æ´¢·½·¨
+            // BSQçš„å­˜å‚¨æ–¹æ³•
             if (num / colNum / rowNum + 1 == bandNum) {
-                int row = (num / colNum) - (bandNum - 1) * rowNum; // È¡µÃÖ¸¶¨²¨¶ÎĞĞÊı
-                int col = num % colNum; // »ñµÃÁĞÊı
+                int row = (num / colNum) - (bandNum - 1) * rowNum; // å–å¾—æŒ‡å®šæ³¢æ®µè¡Œæ•°
+                int col = num % colNum; // è·å¾—åˆ—æ•°
                 image.at<int16_t>(row, col) = value;
                 // cout << row << " " << col <<" " << image.at<int16_t>(row,col) << endl;
             }
@@ -45,12 +45,12 @@ Mat readBinaryImageOfBandX(
         float value;
         ifstream readDatFstream(filepath, ios::binary | ios::in);
         while (readDatFstream.read(
-            (char*)&value, dataType // =2
+                (char*)&value, dataType // =2
         )) {
-            // BSQµÄ´æ´¢·½·¨
+            // BSQçš„å­˜å‚¨æ–¹æ³•
             if (num / colNum / rowNum + 1 == bandNum) {
-                int row = (num / colNum) - (bandNum - 1) * rowNum; // È¡µÃÖ¸¶¨²¨¶ÎĞĞÊı
-                int col = num % colNum; // »ñµÃÁĞÊı
+                int row = (num / colNum) - (bandNum - 1) * rowNum; // å–å¾—æŒ‡å®šæ³¢æ®µè¡Œæ•°
+                int col = num % colNum; // è·å¾—åˆ—æ•°
                 image.at<float>(row, col) = value;
             }
             num++;
@@ -60,13 +60,13 @@ Mat readBinaryImageOfBandX(
     else {
         cout << "falied to load an image!" << endl;
         return Mat(0, 0, CV_8UC3);
-        // ·µ»ØÃ»ÓĞÈÎºÎÒâÒåµÄ¿ÕÍ¼Ïñ
+        // è¿”å›æ²¡æœ‰ä»»ä½•æ„ä¹‰çš„ç©ºå›¾åƒ
     }
 }
 
-// Ò»´ÎĞÔ¶ÁÈ¡¶à¹âÆ×Êı¾İÖ±½Ó´æµ½Ò»¸övectorÀï
+// ä¸€æ¬¡æ€§è¯»å–å¤šå…‰è°±æ•°æ®ç›´æ¥å­˜åˆ°ä¸€ä¸ªvectoré‡Œ
 vector<cv::Mat> readMultiSpectralImage(string filepath, int rowNum, int colNum,
-    int bandNum, int DataType, string format) {
+                                       int bandNum, int DataType, string format) {
 
     vector<cv::Mat> MultiSpectralImage;
 
@@ -74,7 +74,7 @@ vector<cv::Mat> readMultiSpectralImage(string filepath, int rowNum, int colNum,
         if (DataType == 4) {
             for (int i = 0; i < bandNum; i++) {
                 MultiSpectralImage.push_back(readBinaryImageOfBandX(
-                    filepath, rowNum, colNum, i + 1, bandNum, DataType)
+                        filepath, rowNum, colNum, i + 1, bandNum, DataType)
                 );
             }
         }
