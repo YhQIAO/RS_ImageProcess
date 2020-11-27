@@ -1,0 +1,13 @@
+7 (TM)
+10 26 2.6 120.5 36.25 (Geometrical conditions)
+4 Subartic Summer
+3 Urban Model
+40 visibility or aot
+-0.16  (target level, negative value)
+-1000 (sensor level)
+25 (chosen band)
+0 Homogeneous surface
+0 No directional effects
+1 (mean spectral value)
+0 Atm. correction Lambertian
+-0.3 reflectance (negative value)

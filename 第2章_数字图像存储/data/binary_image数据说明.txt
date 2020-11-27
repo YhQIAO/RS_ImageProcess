@@ -1,0 +1,22 @@
+该数据由头文件和数据文件组成，头文件和数据文件存储时中间无间隔，头文件在前
+
+头文件存储信息（共22字节）：
+string sensor;	//传感器类型，该字符串为‘IKONOS’
+int samples;	//列数
+int lines;	//行数
+int bands;	//波段数
+int year;	//年
+int month;	//月
+int day;	//日
+double precision;	//分辨率
+
+
+
+列数：515
+行数：449
+波段数：4
+文件类型：ENVI标准格式
+字节序：小端（Host Intel）
+数据类型：Float
+多波段存储方式：BIL
+

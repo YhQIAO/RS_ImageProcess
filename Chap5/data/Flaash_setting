@@ -1,0 +1,82 @@
+;
+;ENVI FLAASH PARAMETERS TEMPLATE (5.2.1)
+;Written Fri Dec 04 18:44:27 2015
+;
+; Project Parameters
+enviacc.prj.radiance_file = D:\RSDIP\chapter06\results\Landsat5_sd_bil.dat
+enviacc.prj.reflect_file = D:\RSDIP\chapter06\results\Landsat5_sd_ref.dat
+enviacc.prj.filter_func_file = D:\Program Files\Exelis\ENVI52\classic\filt_func\tm.sli
+enviacc.prj.filter_func_file_index = 6
+enviacc.prj.water_band_choice = 1.13
+enviacc.prj.red_channel = 3
+enviacc.prj.green_channel = 2
+enviacc.prj.blue_channel = 0
+enviacc.prj.water_abs_channel = 0
+enviacc.prj.water_ref_channel = 0
+enviacc.prj.kt_upper_channel = 6
+enviacc.prj.kt_lower_channel = 3
+enviacc.prj.kt_cutoff = 0.0800
+enviacc.prj.kt_ratio = 0.5000
+enviacc.prj.cirrus_channel = 0
+enviacc.prj.water_retrieval = 0
+enviacc.prj.modtran_directory = C:\Users\ADMINI~1\AppData\Local\Temp\
+;
+; MODTRAN Parameters
+enviacc.modtran.visvalue = 40.0000
+enviacc.modtran.f_resolution = 15.0000
+enviacc.modtran.day = 27
+enviacc.modtran.month = 10
+enviacc.modtran.year = 2006
+enviacc.modtran.gmt = 2.5075
+enviacc.modtran.latitude = 36.2621
+enviacc.modtran.longitude = 120.5038
+enviacc.modtran.sensor_altitude = 705.0000
+enviacc.modtran.ground_elevation = 0.1680
+enviacc.modtran.view_zenith_angle = 180.0000
+enviacc.modtran.view_azimuth = 0.0000
+enviacc.modtran.atmosphere_model = 4
+enviacc.modtran.aerosol_model = 5
+enviacc.modtran.multiscatter_model = 2
+enviacc.modtran.disort_streams = 8
+enviacc.modtran.co2mix = 390.0000
+enviacc.modtran.water_column_multiplier = 1.0000
+;
+; Image Parameters
+enviacc.img.nspatial = 500
+enviacc.img.nlines = 500
+enviacc.img.data_type = 4
+enviacc.img.margin1 = 0
+enviacc.img.margin2 = 0
+enviacc.img.nskip = 0
+enviacc.img.pixel_size = 30.0000
+enviacc.img.sensor_name = UNKNOWN-MSI
+;
+; Analysis Parameters
+enviacc.ana.aerosol_scaleht = 1.5000
+enviacc.ana.use_adjacency = 1
+enviacc.ana.output_scale = 10000.0000
+enviacc.ana.polishing_res = 0
+enviacc.ana.aerosol_retrieval = 1
+enviacc.ana.calc_wl_correction = 0
+enviacc.ana.reuse_modtran_calcs = 0
+enviacc.ana.use_square_slit_function = 0
+enviacc.ana.convolution_method = fft
+enviacc.ana.use_tiling = 1
+enviacc.ana.tile_size = 100.0000
+;
+; GParameters Parameters
+enviacc.gparameters.gfact = 0
+enviacc.gparameters.gval = 0.0000
+enviacc.gparameters.use_lr_method = 0
+enviacc.gparameters.multikernel = 1
+enviacc.gparameters.autoroi = auto
+enviacc.gparameters.selarg = a
+;
+; Spectral Parameters
+enviacc.spc.wavelength_units = micron
+enviacc.spc.lambda = [
+    0.4850,     0.5690,     0.6600,     0.8400,     1.6760,     2.2230] 
+enviacc.spc.fwhm = [
+  0.070000,   0.080000,   0.060000,   0.140000,   0.200000,   0.270000] 
+enviacc.img.p_input_scale = [
+   10.0000,    10.0000,    10.0000,    10.0000,    10.0000,    10.0000] 

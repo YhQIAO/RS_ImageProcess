@@ -1,0 +1,35 @@
+ENVI
+description = {
+  File Resize Result, x resize factor: 1.000000, y resize factor:
+  1.000000.[Sat Sep 06 16:15:31 2014]}
+samples = 395
+lines   = 397
+bands   = 7
+header offset = 0
+file type = ENVI Standard
+data type = 2
+interleave = bil
+sensor type = Landsat OLI
+byte order = 0
+map info = {UTM, 1.000, 1.000, 395865.000, 3492495.000, 3.0000000000e+001, 3.0000000000e+001, 51, North, WGS-84, units=Meters}
+coordinate system string = {PROJCS["UTM_Zone_51N",GEOGCS["GCS_WGS_1984",DATUM["D_WGS_1984",SPHEROID["WGS_1984",6378137.0,298.257223563]],PRIMEM["Greenwich",0.0],UNIT["Degree",0.0174532925199433]],PROJECTION["Transverse_Mercator"],PARAMETER["False_Easting",500000.0],PARAMETER["False_Northing",0.0],PARAMETER["Central_Meridian",123.0],PARAMETER["Scale_Factor",0.9996],PARAMETER["Latitude_Of_Origin",0.0],UNIT["Meter",1.0]]}
+wavelength units = Micrometers
+reflectance scale factor = 10000.000000
+band names = {
+ Coastal aerosol, Blue, Green, Red, Near Infrared (NIR, SWIR 1, SWIR 2}
+wavelength = {
+ 0.443000, 0.482600, 0.561300, 0.654600, 0.864600, 1.609000, 2.201000}
+fwhm = {
+ 0.016000, 0.060100, 0.057400, 0.037500, 0.028200, 0.084700, 0.186700}
+bbl = {
+ 1, 1, 1, 1, 1, 1, 1}
+data reflectance gain values = {
+ 2.30737478e-005, 2.30737478e-005, 2.30737478e-005, 2.30737478e-005, 
+ 2.30737478e-005, 2.30737478e-005, 2.30737478e-005}
+data reflectance offset values = {
+ -1.15368746e-001, -1.15368746e-001, -1.15368746e-001, -1.15368746e-001, 
+ -1.15368746e-001, -1.15368746e-001, -1.15368746e-001}
+earth sun distance = 1.009914
+image quality = 9
+data units = W m^-2 sr^-1 ¦Ìm^-1
+calibration scale factor = 0.100000

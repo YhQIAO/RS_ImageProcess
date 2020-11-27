@@ -1,0 +1,22 @@
+ENVI
+description = {
+  ENVI File, Created [Tue Oct 20 13:54:38 2015]}
+samples = 6
+lines   = 4
+bands   = 1
+header offset = 0
+file type = ENVI Spectral Library
+data type = 4
+interleave = bsq
+sensor type = Unknown
+byte order = 0
+wavelength units = Micrometers
+z plot range = {0.00, 0.35}
+band names = {
+ Spectral Library}
+spectra names = {
+ water, vegetation, soil, building}
+wavelength = {
+ 0.485000, 0.569000, 0.660000, 0.840000, 1.676000, 2.223000}
+bbl = {
+ 1, 1, 1, 1, 1, 1}
