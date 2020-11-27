@@ -1,0 +1,8 @@
+; ENVI Image to Image Tie Points File
+; base file: D:\RSDIP\chapter07\data\base.dat
+; warp file: D:\RSDIP\chapter07\data\warp.dat
+; Base Image (x,y), Warp Image (x,y)
+;
+       850.83        1114.97        595.55         546.98
+       878.39        1114.45        622.44         540.06
+       879.62        1148.37        629.51         573.83

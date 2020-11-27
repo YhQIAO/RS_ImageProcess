@@ -1,0 +1,14 @@
+ENVI
+description = {
+  Band Math Result, Expression = [float(b1)+float(b2)]
+  B1:R:untitled.tifB2:Band 1:1.tif [Mon Jul 14 20:45:08 2014]}
+samples = 300
+lines   = 300
+bands   = 1
+header offset = 0
+file type = ENVI Standard
+data type = 4
+interleave = bsq
+sensor type = Unknown
+byte order = 0
+wavelength units = Unknown

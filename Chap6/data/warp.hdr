@@ -1,0 +1,15 @@
+ENVI
+description = {
+  Create New File Result [Sun Oct 19 19:40:20 2014]}
+samples = 1000
+lines   = 1000
+bands   = 6
+header offset = 0
+file type = ENVI Standard
+data type = 1
+interleave = bsq
+sensor type = Landsat TM
+byte order = 0
+wavelength units = Unknown
+band names = {
+ Band 1, Band 2, Band 3, Band 4, Band 5, Band 7}
