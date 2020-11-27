@@ -1,0 +1,12 @@
+﻿  main.cpp
+C:\Users\julyfire\Desktop\遥感数字图像处理\ImageProcess\Problem3-1\main.cpp(94,79): warning C4244: “=”: 从“double”转换到“_Tp”，可能丢失数据
+          with
+          [
+              _Tp=uchar
+          ]
+C:\Users\julyfire\Desktop\遥感数字图像处理\ImageProcess\Problem3-1\main.cpp(107,74): warning C4244: “=”: 从“double”转换到“_Tp”，可能丢失数据
+          with
+          [
+              _Tp=uchar
+          ]
+  Problem3-1.vcxproj -> C:\Users\julyfire\Desktop\遥感数字图像处理\ImageProcess\x64\Debug\Problem3-1.exe

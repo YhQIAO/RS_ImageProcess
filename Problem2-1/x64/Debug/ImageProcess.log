@@ -1,0 +1,8 @@
+﻿C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\MSBuild\Microsoft\VC\v160\Microsoft.CppBuild.targets(491,5): warning MSB8028: 中间目录(x64\Debug\)包含从另一个项目(ImageProcess.vcxproj)共享的文件。   这会导致错误的清除和重新生成行为。
+  demo1.cpp
+C:\Users\julyfire\Desktop\遥感数字图像处理\ImageProcess\Problem2-1\demo1.cpp(111,44): warning C4244: “=”: 从“double”转换到“_Tp”，可能丢失数据
+          with
+          [
+              _Tp=uchar
+          ]
+  ImageProcess.vcxproj -> C:\Users\julyfire\Desktop\遥感数字图像处理\ImageProcess\x64\Debug\Problem2-1.exe

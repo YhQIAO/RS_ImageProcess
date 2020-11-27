@@ -1,0 +1,4 @@
+﻿  源.cpp
+C:\Users\julyfire\Desktop\遥感数字图像处理\ImageProcess\Problem4-2\ColorTransFormation.h(8,1): warning C4005: “PI”: 宏重定义
+C:\Users\julyfire\Desktop\遥感数字图像处理\ImageProcess\Problem4-2\DiscreteFourierTransform.h(21): message : 参见“PI”的前一个定义
+  Problem4-2.vcxproj -> C:\Users\julyfire\Desktop\遥感数字图像处理\ImageProcess\x64\Debug\Problem4-2.exe
