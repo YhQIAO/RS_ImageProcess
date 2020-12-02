@@ -16,16 +16,16 @@ void Brovey() {
 		readBinaryImageOfBandX(multiBandPath, 397, 395, 4, 7, 2, "BIL")
 	};
 	cv::Mat multiBGRImage;
-	cv::merge(multiBand, 3, multiBGRImage);  // CV_16S
+	cv::merge(multiBand, 3, multiBGRImage);
 
 
 	string panPath = "../../Chap8/data/Landsat8_OLI_pan.dat";
 	cv::Mat panImage = readBinaryImageOfBandX(panPath, 796, 792, 1, 1, 12, "BSQ");
-
+    ;
 	cv::Mat panBGR[] = {
-		cv::Mat(panImage.size(), CV_16UC1),
-		cv::Mat(panImage.size(), CV_16UC1),
-		cv::Mat(panImage.size(), CV_16UC1)
+		cv::Mat(panImage.size(), CV_8UC1),
+		cv::Mat(panImage.size(), CV_8UC1),
+		cv::Mat(panImage.size(), CV_8UC1)
 	};
 
 	for (int i = 0; i < panImage.rows; i++) {
@@ -35,15 +35,14 @@ void Brovey() {
 			int n = (int)(((double)j / panImage.cols) * multiBGRImage.cols);
 
 
-			int sum = multiBand[0].at<int16_t>(m, n) +
-				multiBand[1].at<int16_t>(m, n) +
-				multiBand[2].at<int16_t>(m, n);
+			int sum = (int)multiBand[0].at<uchar>(m, n) +
+                    (int)multiBand[1].at<uchar>(m, n) +
+                    (int)multiBand[2].at<uchar>(m, n);
 
 			for (int k = 0; k < 3; k++) {
-				panBGR[k].at<uint16_t>(i, j) = (int)(
-					(double)(panImage.at<uint16_t>(i, j) * multiBand[k].at<int16_t>(m, n)) / sum
+				panBGR[k].at<uchar>(i, j) = 3*(int)(
+					(double)(panImage.at<uchar>(i, j) * multiBand[k].at<uchar>(m, n)) / sum
 					);
-				// cout << panBGR[k].at<int16_t>(i, j) << endl;
 			}
 		}
 	}
@@ -52,9 +51,9 @@ void Brovey() {
 	cv::merge(panBGR, 3, panBGRImage);
 
 
-	cv::imshow("multiImage", multiBGRImage *20);
-	cv::imshow("panImage", panImage * 4);
-	cv::imshow("panBGRImage", panBGRImage * 10);
+	cv::imshow("multiImage", multiBGRImage);
+	cv::imshow("panImage", panImage);
+	cv::imshow("panBGRImage", panBGRImage);
 	cv::waitKey(0);
 
 }

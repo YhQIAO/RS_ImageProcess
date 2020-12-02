@@ -14,8 +14,6 @@ Mat readBinaryImageOfBandX(
     string filepath, int rowNum, int colNum,
     int bandNum, int AllBandNum, int dataType, string format) {
 
-
-
     if (dataType == 2) {
         Mat image(rowNum, colNum, CV_16SC1);
         // 16-bit signed integer
@@ -47,6 +45,10 @@ Mat readBinaryImageOfBandX(
                 num++;
             }
         }
+        double min,max;
+        cv::minMaxLoc(image, &min, &max);
+        image = (image-min) * (255.0/ (max-min));
+        image.convertTo(image, CV_8UC1, 1.0);
         return image;
     }
 
@@ -82,6 +84,10 @@ Mat readBinaryImageOfBandX(
                 num++;
             }
         }
+        double min,max;
+        cv::minMaxLoc(image, &min, &max);
+        image = (image-min) * (255.0/ (max-min));
+        image.convertTo(image, CV_8UC1, 1.0);
         return image;
     }
     
