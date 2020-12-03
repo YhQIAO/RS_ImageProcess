@@ -10,6 +10,7 @@ using namespace std;
 using namespace cv;
 using namespace Eigen;
 
+// 读取图像并且自动拉伸到0-255范围返回8bit位图像
 Mat readBinaryImageOfBandX(
     string filepath, int rowNum, int colNum,
     int bandNum, int AllBandNum, int dataType, string format) {
