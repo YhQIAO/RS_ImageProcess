@@ -72,9 +72,6 @@ void PCA_Fusion(vector<cv::Mat> MultiSpectralImage, cv::Mat highImage) {
             normal_DataMat(j, i) = (dataMat(j, i) - ave);
         }
     }
-    cout << ave1 << endl;
-
-
     // 把高分辨率向量也归一化
     float high_ave = highVec.col(0).sum() / highVec.rows();
     float scale = ave1 / high_ave;
