@@ -1,6 +1,7 @@
 #pragma once
 #include <iostream>
 #include <opencv2/opencv.hpp>
+#include <numeric>
 
 using namespace std;
 
@@ -28,6 +29,7 @@ cv::Mat getHistogramPic(cv::Mat image) {
     for (int i = 0; i < 256; i++) {
         int height = (int)(((double)his[i] / max) * 255);
         for (int m = 255 - height + 1; m < 256; m++) {
+
             hisGraph.at<uchar>(m, i) = 255;
         }
     }
@@ -80,6 +82,74 @@ cv::Mat HistogramNormalize(cv::Mat image) {
 }
 
 // 直方图匹配 
+cv::Mat hisMatch(cv::Mat oriImage, double his[]) {
+    cv::Mat ori_normalized = HistogramNormalize(oriImage);
+
+    double sum = 0;
+    for (int i = 0; i < 256; i++) {
+        sum += his[i];
+    }
+    for (int i = 0; i < 256; i++) {
+        his[i] = his[i] / sum;
+    }
+    
+    double s[256] = { 0 };
+    for (int i = 0; i < 256; i++) {
+        double sum = 0;
+        for (int j = 0; j <= i; j++) {
+            sum += his[j];
+        }
+        s[i] = sum;
+    }
+    
+    int rehis[256] = { 0 };
+    for (int i = 0; i < 256; i++) {
+        rehis[i] = (int)(255 * s[i]);
+        // 原来灰度值为i的， 灰度值变化为rehis[i]
+    } // 这个时候得到了变化函数G 即灰度值为i的， 灰度值变化为rehis[i]
+
+    //下面反过来求，即灰度值为rehis[i](或者距离最近的）变化为i
+    int inhis[256] = { 0 };
+    
+    for (int i = 0; i < 256; i++) {
+
+        int minDel = 999;
+        int minIndex = -1;
+
+        for (int j = 0; j < 256; j++) {
+            int del = abs(i - rehis[j]);
+            if (del < minDel) {
+                minDel = del;
+                minIndex = j;
+            }
+        }
+        inhis[i] = minIndex;
+    }
+    cv::Mat reImage(oriImage.size(), CV_8UC1);
+    for (int i = 0; i < oriImage.rows; i++) {
+        for (int j = 0; j < oriImage.cols; j++) {
+            reImage.at<uchar>(i, j) = inhis[ori_normalized.at<uchar>(i, j)];
+        }
+    }
+    return reImage;
+}
+
+void showArrHis(double arr[]) {
+    
+    double max = *max_element(arr, arr + 255);
+    cv::Mat hisGraph(
+        256, 256, CV_8UC1, cv::Scalar(0, 0, 0));
+    for (int i = 0; i < 256; i++) {
+        int height = (int)( arr[i] / max * 255*0.9);
+        for (int m = 255 - height + 1; m < 256; m++) {
+            hisGraph.at<uchar>(m, i) = 255;
+        }
+    }
+    cv::imshow("his", hisGraph);
+    cv::waitKey(0);
+}
+
+// 直方图匹配 
 cv::Mat hisMatch(cv::Mat oriImage, cv::Mat aimImage) {
     /*
     * 先把原图像均衡化一便
@@ -125,7 +195,7 @@ cv::Mat hisMatch(cv::Mat oriImage, cv::Mat aimImage) {
 
     //下面反过来求，即灰度值为rehis[i](或者距离最近的）变化为i
     int inhis[256] = { 0 };
-    
+
     for (int i = 0; i < 256; i++) {
 
         int minDel = 999;
