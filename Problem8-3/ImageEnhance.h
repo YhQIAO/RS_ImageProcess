@@ -32,7 +32,6 @@ cv::Mat Sobel(cv::Mat oriImage) {
     horizontal.at<int16_t>(0,0) = -1;horizontal.at<int16_t>(0,1) = 0;horizontal.at<int16_t>(0,2) = 1;
     horizontal.at<int16_t>(1,0) = -2;horizontal.at<int16_t>(1,1) = 0;horizontal.at<int16_t>(1,2) = 2;
     horizontal.at<int16_t>(2,0) = -1;horizontal.at<int16_t>(2,1) = 0;horizontal.at<int16_t>(2,2) = 1;
-    cout << horizontal << endl;
     cv::Mat vertical(3,3,CV_16SC1);
     vertical.at<int16_t>(0,0) = -1;vertical.at<int16_t>(0,1) = -2;vertical.at<int16_t>(0,2) = -1;
     vertical.at<int16_t>(1,0) = 0;vertical.at<int16_t>(1,1) = 0;vertical.at<int16_t>(1,2) = 0;
@@ -52,3 +51,22 @@ cv::Mat Sobel(cv::Mat oriImage) {
     return edge;
 }
 
+cv::Mat Laplance(cv::Mat oriImage) {
+
+    cv::Mat kernel(3,3,CV_16SC1);
+    kernel.at<int16_t>(0,0) = 0;kernel.at<int16_t>(0,1) = 1;kernel.at<int16_t>(0,2) = 0;
+    kernel.at<int16_t>(1,0) = 1;kernel.at<int16_t>(1,1) = -4;kernel.at<int16_t>(1,2) = 1;
+    kernel.at<int16_t>(2,0) = 0;kernel.at<int16_t>(2,1) = 1;kernel.at<int16_t>(2,2) = 0;
+
+    cv::Mat edge(oriImage.size(),oriImage.type());
+    cv::filter2D(oriImage,edge,oriImage.depth(),kernel);
+    return edge;
+}
+
+cv::Mat Morphology_gradient(cv::Mat oriImage) {
+    cv::Mat erodedImage(oriImage.size(),oriImage.type());
+    cv::Mat dilatedImage(oriImage.size(), oriImage.type());
+    cv::erode(oriImage,erodedImage,cv::Mat());
+    cv::dilate(oriImage,dilatedImage,cv::Mat());
+    return dilatedImage-erodedImage;
+}
