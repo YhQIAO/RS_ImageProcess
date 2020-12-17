@@ -1,6 +1,6 @@
 /*
 * 频率域图像增强
-* 写个同态滤波
+* 
 */
 
 #include<iostream>
@@ -12,26 +12,18 @@ using namespace std;
 cv::Mat readBinary8bitImage(
 	string filepath, int rowNum, int colNum);
 cv::Mat FFT_Shift(cv::Mat complexI);
+cv::Mat DepolarizationStretch_2Percent(cv::Mat oriImage);
 
 int main() {
 	string filepath1 = "../../Chap8/data/Landsat8_OLI_b2.dat";
 	cv::Mat OriImage = readBinary8bitImage(filepath1, 397, 395);
-	OriImage.convertTo(OriImage, CV_32F);
-	cv::imshow("oriImage", OriImage/255.0);
 
-	cv::Mat logImage(OriImage.size(), CV_32F);
-	for (int i = 0; i < OriImage.rows; i++) {
-		for (int j = 0; j < OriImage.cols; j++) {
-			logImage.at<float>(i, j) =  OriImage.at<float>(i, j)+;
-		}
-	}
-	
 	cv::Mat padded;
-	int m = cv::getOptimalDFTSize(logImage.rows);
-	int n = cv::getOptimalDFTSize(logImage.cols);
-	cv::copyMakeBorder(logImage, padded,
-		0, m - logImage.rows,
-		0, n - logImage.cols,
+	int m = cv::getOptimalDFTSize(OriImage.rows);
+	int n = cv::getOptimalDFTSize(OriImage.cols);
+	cv::copyMakeBorder(OriImage, padded,
+		0, m - OriImage.rows,
+		0, n - OriImage.cols,
 		CV_HAL_BORDER_CONSTANT,
 		cv::Scalar::all(0));
 	cv::Mat planes[] = {
@@ -43,43 +35,59 @@ int main() {
 	cv::merge(planes, 2, complexI);
 	cv::dft(complexI, complexI); // 调用fft算法
 	complexI = FFT_Shift(complexI);
-	double n1 = (complexI.rows-1) / 2.0;
-	double n2 = (complexI.cols-1) / 2.0;
 
-	//同态滤波器 本质是压缩低频增加高频
+	double n1 = (complexI.rows - 1) / 2.0;
+	double n2 = (complexI.cols - 1) / 2.0;
+
+	int choice;
+	cout << "1. 高频增强 2.高斯高通滤波增强" << endl;
+	cin >> choice;
+	//滤波器
 	for (int i = 0; i < complexI.rows; i++) {
 		for (int j = 0; j < complexI.cols; j++) {
-			//double d = sqrt(
-			//	(i - n1) * (i - n1) + (j - n2) * (j - n2));
-			///*double d0 = 35.0;
-			//double c = 1.0;
-			//double rh = 2;
-			//double rl = 0.25;
-			//double h =
-			//	(rh - rl) * (1 - exp(-1 * c * (d * d / (d0 *d0)))) + rl;*/
-			//if (d > 35) {
-			//	complexI.at<cv::Vec2f>(i, j)[0] *= 2;
-			//	complexI.at<cv::Vec2f>(i, j)[1] *= 2;
-			//}
+			double d = sqrt(
+				(i - n1) * (i - n1) + (j - n2) * (j - n2));
+			
+			if (choice == 1) {
+				if (d > 35) {
+					complexI.at<cv::Vec2f>(i, j)[0] *= 2;
+					complexI.at<cv::Vec2f>(i, j)[1] *= 2;
+				}
+			}
+			else if(choice == 2) {
+				double h = 1.0 - exp((-d * d) / (2.0 * 35.0 * 35.0));
+				complexI.at<cv::Vec2f>(i, j)[0] *= h;
+				complexI.at<cv::Vec2f>(i, j)[1] *= h;
+			}
 		}
 	}
+
 	complexI = FFT_Shift(complexI);
 	cv::Mat ifft;
 	cv::idft(complexI, ifft, cv::DFT_REAL_OUTPUT);
-	for (int i = 0; i < ifft.rows; i++) {
-		for (int j = 0; j < ifft.cols; j++) {
-			
-		}
-	}
 	cv::normalize(ifft, ifft, 0, 1, cv::NORM_MINMAX);
-	cv::imshow("ifft", ifft);
-	cv::waitKey(0);
+	ifft.convertTo(ifft, CV_8UC1, 255);
 
+	if (choice == 1) {
+		cv::imshow("oriImage", OriImage);
+		ifft = DepolarizationStretch_2Percent(ifft);
+		cv::imshow("ifft", ifft);
+	}
+	else {
+		cv::imshow("oriImage", OriImage);
+		ifft = DepolarizationStretch_2Percent(ifft);
+		cv::imshow("ifft", ifft);
+		cv::Mat edge(ifft, cv::Rect(0, 0, OriImage.cols, OriImage.rows));
+		cv::imshow("enhance", DepolarizationStretch_2Percent(OriImage + 0.5 * edge));
+	}
+
+
+
+	cv::waitKey(0);
 }
 
 cv::Mat readBinary8bitImage(
 	string filepath, int rowNum, int colNum) {
-
 	cv::Mat image(rowNum, colNum, CV_8UC1);
 	int num = 0;
 	int value;
@@ -115,4 +123,47 @@ cv::Mat FFT_Shift(cv::Mat complexI) {
 	q2.copyTo(q1);
 	tmp.copyTo(q2);
 	return ReComplexI;
+}
+
+cv::Mat DepolarizationStretch_2Percent(cv::Mat oriImage) {
+	// 0-255
+	int* his = (int*)malloc(sizeof(int) * 255);
+	for (int i = 0; i < 255; i++) {
+		his[i] = 0;
+	}
+	for (int i = 0; i < oriImage.rows; i++) {
+		for (int j = 0; j < oriImage.cols; j++) {
+			his[(oriImage.at<uchar>(i, j))]++;
+		}
+	}
+
+	int allPixelNum = oriImage.rows * oriImage.cols;
+	int minDN, maxDN;
+	int sum = 0;
+	int count = 0;
+	while (sum < allPixelNum * 0.01) {
+		sum += his[count++];
+	}
+	minDN = count;
+
+	while (sum < allPixelNum * 0.99) {
+		sum += his[count++];
+	}
+	maxDN = count;
+
+	cv::Mat result(oriImage.rows, oriImage.cols, CV_8UC1);
+	for (int i = 0; i < oriImage.rows; i++) {
+		for (int j = 0; j < oriImage.cols; j++) {
+			if (oriImage.at<uchar>(i, j) < minDN) {
+				result.at<uchar>(i, j) = 0;
+			}
+			else if (oriImage.at<uchar>(i, j) > maxDN) {
+				result.at<uchar>(i, j) = 255;
+			}
+			else {
+				result.at<uchar>(i, j) = (oriImage.at<uchar>(i, j) - minDN) / (double)(maxDN - minDN) * 255;
+			}
+		}
+	}
+	return result;
 }
